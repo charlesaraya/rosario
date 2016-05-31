@@ -20,7 +20,7 @@ El proyecto tiene los siguientes directorios:
 
 ###sets
 
-Los sets AIML son listas de strings únicos que comparten una característica común. por ejemplo, un set de **colores** consistirá en una lista de colores (azul, rojo, amarillo, etc.). Gracias a los sets reduciremos dramáticamente el número de categorías necesarias para cubrir una conversación que implique hablar de colores.
+Los sets AIML son listas de strings en JSON de elementos únicos que comparten una característica común. por ejemplo, un set de **colores** consistirá en una lista de colores (azul, rojo, amarillo, etc.). Gracias a los sets reduciremos dramáticamente el número de categorías necesarias para cubrir una conversación que implique hablar de colores.
 
 - **Humano**: ¿Es el verde un color?
 - **Bot**: Si, el verde es un color.
