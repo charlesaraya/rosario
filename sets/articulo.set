@@ -1,14 +1,15 @@
 [
-  ["el"], 
-  ["la"], 
-  ["los"], 
+  ["el"],
+  ["la"],
+  ["los"],
   ["las"],
   ["un"],
   ["uno"],
   ["una"],
-  ["unos"], 
-  ["unas"], 
-  ["lo"], 
-  ["al"], 
-  ["del"]
+  ["unos"],
+  ["unas"],
+  ["lo"],
+  ["al"],
+  ["del"],
+  ["fooz"]
 ]

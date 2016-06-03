@@ -1,10 +1,10 @@
 [
-  ["Sabado", "Domingo"], 
-  ["Viernes", "Sabado"], 
-  ["Jueves", "Viernes"], 
-  ["Miercoles", "Jueves"], 
-  ["Martes", "Miercoles"], 
-  ["Lunes", "Martes"], 
-  ["Domingo", "Lunes"], 
+  ["Sabado", "Domingo"],
+  ["Viernes", "Sabado"],
+  ["Jueves", "Viernes"],
+  ["Miercoles", "Jueves"],
+  ["Martes", "Miercoles"],
+  ["Lunes", "Martes"],
+  ["Domingo", "Lunes"],
   ["fooz", "barz"]
 ]
