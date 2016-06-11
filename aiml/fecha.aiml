@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+<!-- File: date.aiml -->
+<!-- Last modified: Junio 11, 2016 -->
+<!--  -->
+<!-- This AIML file is part of the Rosario knowledge base. -->
+<!--  -->
+<!-- Rosario is a fork of the Rosie brain which is a fork of the ALICEBOT2 brain, and is optimized for use on the Pandorabots platform -->
+<!--  -->
+<!-- The Rosario brain is released under the terms of the GNU Lesser General -->
+<!-- Public License, as published by the Free Software Foundation. -->
+<!--  -->
+
+  <category>
+    <pattern>ESTACION</pattern>
+    <template>
+      <think>
+        <set var="mes"><date format="%B" jformat="MMMMMMMMM"/></set>
+      </think>
+      <condition var="mes">
+        <li><value>Enero</value>Invierno</li>
+        <li><value>Febrero</value>Invierno</li>
+        <li><value>Marzo</value>Primavera</li>
+        <li><value>Abril</value>Primavera</li>
+        <li><value>Mayo</value>Primavera</li>
+        <li><value>Junio</value>Verano</li>
+        <li><value>Julio</value>Verano</li>
+        <li><value>Agosto</value>Verano</li>
+        <li><value>Septiembre</value>Otoño</li>
+        <li><value>Octubre</value>Otoño</li>
+        <li><value>Noviembre</value>Otoño</li>
+        <li><value>Diciembre</value>Invierno</li>
+        <li>desconocido</li>
+      </condition>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DIA</pattern>
+    <template>Hoy es <date format="%A" jformat="EEEEEEEEEE"/></template>
+  </category>
+
+  <category>
+    <pattern>MAÑANA ^</pattern>
+    <template>
+      <think>
+        <set var="hoy"><date format="%A" jformat="EEEEEEEEEE"/></set>
+      </think>
+      <map name="mañana"><get var="hoy"/></map>
+    </template>
+  </category>
+
+  <category>
+    <pattern>AÑO ^</pattern>
+    <template>Estamos en <date format="%Y" jformat="yyyy"/></template>
+  </category>
+
+  <category>
+    <pattern>PROXIMO AÑO ^</pattern>
+    <template>
+      <map><name>sucesor</name><date format="%Y" jformat="yyyy"/></map>
+    </template>
+  </category>
+
+  <category>
+    <pattern>AÑO PASADO ^</pattern>
+    <template>
+      <map><name>predecesor</name><date format="%Y" jformat="yyyy"/></map>
+    </template>
+  </category>
+
+  <category>
+    <pattern>MES</pattern>
+    <template>Estamos en <date format="%B" jformat="MMMMMMMMM"/></template>
+  </category>
+<!-- TODO : Controlar Hora 'La Una' -->
+  <category>
+    <pattern>HORA</pattern>
+    <template>Son las <date format="%I:%M %p" jformat="h:mm a"/></template>
+  </category>
+
+  <category>
+    <pattern>FECHA</pattern>
+    <template>Hoy es <date format="%B %d, %Y" jformat="MMMMMMMMM dd, yyyy"/></template>
+  </category>
+
+  <category>
+    <pattern>PERIODO DEL DIA</pattern>
+    <template>
+      <think>
+        <set var="hora"><date format="%I" jformat="h"/></set>
+        <set var="ampm"><date format="%p" jformat="a"/></set>
+      </think>
+      <condition>
+        <li value="AM" var="ampm">Mañana</li>
+        <li>
+          <condition var="hora">
+            <li value="12">Mediodía</li>
+            <li value="1">Tarde</li>
+            <li value="2">Tarde</li>
+            <li value="3">Tarde</li>
+            <li value="4">Tarde</li>
+            <li value="5">Tarde</li>
+            <li value="6">Tarde</li>
+            <li>Noche</li>
+          </condition>
+        </li>
+      </condition>
+    </template>
+  </category>
+
+  <category>
+    <pattern>FECHA Y HORA</pattern>
+    <template>La fecha y hora es <date/></template>
+  </category>
+
+  <category>
+    <pattern>DIAS HASTA NAVIDAD</pattern>
+    <template>
+      <interval format="%B %d" jformat="MMMMMMMMM dd">
+        <style>dias</style>
+        <from><date format="%B %d" jformat="MMMMMMMMM dd"/></from>
+        <to>Diciembre 5</to>
+      </interval> 
+      días hasta Navidad.
+    </template>
+  </category>
+
+  <category>
+    <pattern>DIAS HASTA EL <set>numero</set> DE <set>mes</set> DE <set>numero</set></pattern>
+    <template>
+      <interval format="%B %d %Y" jformat="MMMMMMMMM dd yyyy">
+        <style>dias</style>
+        <from><date format="%B %d %Y" jformat="MMMMMMMMM dd yyyy"/></from>
+        <to><star index="2"/> <star/> <star index="3"/></to>
+      </interval> 
+      días.
+    </template>
+  </category>
+
+  <category>
+    <pattern>DIAS HASTA EL <set>numero</set> DE <set>mes</set></pattern>
+    <template>
+      <interval format="%B %d %Y" jformat="MMMMMMMMM dd yyyy">
+        <style>dias</style>
+        <from><date format="%B %d %Y" jformat="MMMMMMMMM dd yyyy"/></from>
+        <to><star index="2"/> <star/> <date format="%Y" jformat="yyyy"/></to>
+      </interval> 
+      días.
+    </template>
+  </category>
+
+  <category>
+    <pattern>FECHA MAÑANA</pattern>
+    <template><srai>FECHAMAÑANA <date format="%B %d %Y" jformat="MMMMMMMMM dd yyyy"/></srai></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA * <set>numero</set> <set>numero</set></pattern>
+    <template><star/> <map name="sucesor"><star index="2"/></map>, <star index="3"/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA ENERO 31 DE <set>numero</set></pattern>
+    <template>Febrero 1, <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA FEBRERO 28 2012</pattern>
+    <template>Febrero 29, <star/></template>
+  </category>
+
+  <!-- Años bisiestos -->
+  <category>
+    <pattern>FECHAMAÑANA 28 DE FEBRERO DE <set>bisiesto</set></pattern>
+    <template>29 de Febrero de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 28 DE FEBRERO DE <set>numero</set></pattern>
+    <template>1 de Marzo de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 29 DE FEBRERO DE <set>numero</set></pattern>
+    <template>1 de Marzo de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 31 DE MARZO DE <set>numero</set></pattern>
+    <template>1 de Abril de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 30 DE ABRIL DE <set>numero</set></pattern>
+    <template>1 de Mayo de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 31 DE MAYO DE <set>numero</set></pattern>
+    <template>1 de Junio de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 30 DE JUNIO DE <set>numero</set></pattern>
+    <template>1 de Julio de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 31 DE JULIO DE <set>numero</set></pattern>
+    <template>1 de Agosto de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 31 DE AGOSTO DE <set>numero</set></pattern>
+    <template>1 de Septiembre de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 30 DE SEPTIEMBRE DE <set>numero</set></pattern>
+    <template>1 de Octubre de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 31 DE OCTUBRE DE <set>numero</set></pattern>
+    <template>1 de Noviembre de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 30 DE NOVIEMBRE DE <set>numero</set></pattern>
+    <template>1 de Diciembre de <star/></template>
+  </category>
+
+  <category>
+    <pattern>FECHAMAÑANA 31 DE DICIEMBRE DE <set>numero</set></pattern>
+    <template>1 de Enero de <map name="sucesor"><star/></map></template>
+  </category>
+
+  <category>
+    <pattern>FECHAPASADOMAÑANA * <set>numero</set> <set>numero</set></pattern>
+    <template>
+      <srai>FECHAMAÑANA 
+        <srai>FECHAMAÑANA <star/> <star index="2"/> <star index="3"/></srai>
+      </srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>FECHAPASADOMAÑANA</pattern>
+    <template><srai>DIA EN 2 DIAS</srai></template>
+  </category>
+
+  <category>
+    <pattern>PASADO MAÑANA</pattern>
+    <template>
+      <map name="mañana">
+        <map name="mañana">
+          <date format="%A" jformat="EEEEEEEEEE"/>
+        </map>
+      </map>
+    </template>
+  </category>
+
+  <category>
+    <pattern>FECHA EN <set>numero</set> DIAS</pattern>
+    <template>
+      <think>
+        <set var="dias"><star/></set>
+        <set var="fecha"><date format="%B %d %Y" jformat="MMMMMMMMM dd yyyy"/></set>
+      </think>
+      <condition var="dias">
+        <li value="0"><get var="date"/></li>
+        <li>
+          <think>
+            <set var="fecha"><srai>FECHAMAÑANA <get var="fecha"/></srai></set> 
+            <set var="dias"><map name="predecesor"><get var="dias"/></map></set>
+          </think> 
+          <loop/>
+        </li>
+      </condition>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DIAS HASTA EL <set>dia</set></pattern>
+    <template>
+      <think>
+        <set var="dia"><star/></set>
+        <set var="hoy"><date format="%A" jformat="EEEEEEEEEE"/></set>
+        <set var="dias">0</set>
+      </think>
+      <condition var="hoy">
+        <li>
+          <value><get var="dia"/></value>
+          <get var="dias"/>
+        </li>
+        <li>
+          <think>
+            <set var="hoy"><map name="mañana"><get var="hoy"/></map></set> 
+            <set var="dias"><map name="sucesor"><get var="dias"/></map></set>
+          </think> 
+          <loop/>
+        </li>
+      </condition>
+    </template>
+  </category>
+
+  <category>
+    <pattern>FECHA EL <set>dia</set></pattern>
+    <template><srai>FECHA EN <srai>DIAS HASTA EL <star/></srai> DIAS</srai></template>
+  </category>
+
+  <category>
+    <pattern>DIAS HASTA EL FIN DE SEMANA</pattern>
+    <template><srai>FECHA EN <srai>DIAS HASTA EL SABADO</srai> DIAS</srai></template>
+  </category>
+
+  <category>
+    <pattern>DIAS HASTA EL FINDE</pattern>
+    <template><srai>DIAS HASTA EL FIN DE SEMANA</srai></template>
+  </category>
+
+  <category>
+    <pattern>FECHA A UNA SEMANA DEL <set>dia</set></pattern>
+    <template>
+      <srai>FECHA EN 
+        <srai>SUCESSOR 
+          <srai>SUCESSOR 
+            <srai>SUCESSOR 
+              <srai>SUCESSOR 
+                <srai>SUCESSOR 
+                  <srai>SUCESSOR 
+                    <srai>SUCESSOR 
+                      <srai>DIAS HASTA EL <star/></srai>
+                    </srai>
+                  </srai>
+                </srai>
+              </srai>
+            </srai>
+          </srai>
+        </srai>
+        DIAS
+      </srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>DIA DE LA SEMANA EN <set>numero</set> DIAS</pattern>
+    <template>
+      <think>
+        <set var="dias"><star/></set>
+        <set var="dia"><date format="%A" jformat="EEEEEEEEEE"/></set>
+      </think>
+      <condition var="dias">
+        <li value="0"><get var="dia"/></li>
+        <li>
+          <think>
+            <set var="dia"><map name="mañana"><get var="dia"/></map></set>
+            <set var="dias"><map name="predecesor"><get var="dias"/></map></set>
+          </think> 
+          <loop/>
+        </li>
+      </condition>
+    </template>
+  </category>
+
+</aiml>
