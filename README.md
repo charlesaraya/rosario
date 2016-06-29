@@ -1,6 +1,8 @@
-#Rosario (chatbot base)
+#Rosario
 
-Rosario es una colección de ficheros AIML y AIML 2.0 que forman una base sólida para cualquier proyecto chatbot. Rosario es un fork del proyecto Rosie, quien a su vez es un fork del proyecto ALICE 2.0. Rosie ha sido optimizada para su uso en la plataforma de Pandorasbots, y Rosario es la versión en Español de la misma. 
+Rosario es una colección de ficheros AIML y AIML 2.0 que forman una base sólida para cualquier proyecto chatbot. Rosario es un fork del proyecto Rosie, quien a su vez es un fork del proyecto ALICE 2.0. Rosie ha sido optimizada para su uso en la plataforma de Pandorabots, y Rosario es la versión en Español de la misma. 
+
+El proyecto está en pleno desarrollo por lo que es totalmente inestable.
 
 Para utilizar a Rosario, crea una cuenta y un nuevo bot en el [Playground](https://playground.pandorabots.com), y sube todos los ficheros del directorio lib. 
 
@@ -32,10 +34,3 @@ Los sets AIML son listas de strings en JSON de elementos únicos que comparten u
 El fichero tendrá la siguiente forma:
 
 [["azul"], ["rojo"], ["amarillo"], ["verde"], ...]
-
-
-###substitutions
-
-
-
-###system
