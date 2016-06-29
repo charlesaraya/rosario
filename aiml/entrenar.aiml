@@ -12,6 +12,54 @@
 <!-- Public License, as published by the Free Software Foundation. -->
 <!--  -->
 
+<!-- TODO: caso A <set>pronombre</set> ME/TE/LES/NOS/OS/LES GUSTA ... -->
+
+  <category>
+    <pattern>A <set>pronombre</set> <set>nombrefamiliar</set> LE GUSTA <set>conjugar</set> *</pattern>
+    <template>
+      <think>
+        <set var="pronombre"><star/></set>
+        <set var="nombrefamiliar"><star index="2"/></set>
+        <set var="verbo"><star index="3"/></set>
+        <set var="objeto"><star index="4"/></set>
+        <set var="conjuga"><map name="conjugar2conjuga"><get var="verbo"/></map></set>
+        <set var="generonombrefamiliar"><map name="familiapronombre"><get var="nombrefamiliar"/></map></set>
+        <set var="pronombreopp"><map name="pronombreopuesto"><get var="pronombre"/></map></set>
+        <set var="respuesta">A <get var="pronombreopp"/> <get var="nombrefamiliar"/> le gusta <get var="verbo"/> <get var="objeto"/>.</set>
+        <srai>SETHESHE <star/></srai>
+        <set var="response"><input/></set>
+        <set var="pattern1">A QUIEN LE GUSTA <get var="verbo"/> <get var="objeto"/></set>
+        <set var="pattern2">QUE LE GUSTA A <get var="pronombreopp"/> <get var="nombrefamiliar"/> ^</set>
+        <set var="pattern3">QUE LE GUSTA A <get var="generonombrefamiliar"/> ^</set>
+        <set var="pattern4">QUE LE GUSTA <get var="verbo"/> ^</set>
+        <set var="pattern5">QUIEN <get var="conjuga"/> <get var="objeto"/> ^</set>
+      </think>
+      ¿También te gusta <get var="verbo"/> <get var="objeto"/>?
+      <learn>
+        <category>
+          <pattern><eval><get var="pattern1"/></eval></pattern>
+          <template>A <eval><get var="pronombreopp"/></eval> <eval><get var="nombrefamiliar"/></eval>.</template>
+        </category>
+        <category>
+          <pattern><eval><get var="pattern2"/></eval></pattern>
+          <template>Le gusta <eval><get var="verbo"/></eval> <eval><get var="objeto"/></eval>.</template>
+          </category>
+        <category>
+          <pattern><eval><get var="pattern3"/></eval></pattern>
+          <template>A <eval><get var="pronombre"/></eval> le gusta <eval><get var="verbo"/></eval> <eval><get var="objeto"/></eval></template>
+          </category>
+        <category>
+          <pattern><eval><get var="pattern4"/></eval></pattern>
+          <template>Le gusta <eval><get var="verbo"/></eval>  <eval><get var="objeto"/></eval></template>
+          </category>
+        <category>
+          <pattern><eval><get var="pattern5"/></eval></pattern>
+          <template><eval><get var="respuesta"/></eval></template>
+        </category>
+      </learn>
+    </template>
+  </category>
+
   <category>
     <pattern>A <set>nombre</set> LE GUSTA <set>conjugar</set> *</pattern>
     <template>
@@ -20,40 +68,40 @@
         <set var="verbo"><star index="2"/></set>
         <set var="conjuga"><map name="conjugar2conjuga"><get var="verbo"/></map></set>
         <set var="objeto"><star index="3"/></set>
+        <set var="generonombre"><map name="generonombre"><get var="nombre"/></map></set>
+        <condition><name><get var="generonombre"/></name>
+          <li value="M"><set var="pronombre">el</set></li>
+          <li><set var="pronombre">ella</set></li>
+        </condition>
         <set var="respuesta"><input/>.</set>
         <srai>SETHESHE <star/></srai>
         <set var="response"><input/></set>
         <set var="pattern1">A QUIEN LE GUSTA <get var="verbo"/> <get var="objeto"/></set>
-        <set var="pattern2">QUE LE GUSATA A <get var="nombre"/> ^</set>
-        <set var="pattern3">QUE LE GUSTA A <get name="pronombre"/> ^</set>
-        <set var="pattern5">QUE LE GUSTA <get var="verbo"/> A <get var="name"/> ^</set>
+        <set var="pattern2">QUE LE GUSTA A <get var="nombre"/> ^</set>
+        <set var="pattern3">QUE LE GUSTA A <get var="pronombre"/> ^</set>
         <set var="pattern4">QUE LE GUSTA <get var="verbo"/> ^</set>
-        <set var="pattern6">QUIEN <get var="conjuga"/> ^</set>
+        <set var="pattern5">QUIEN <get var="conjuga"/> <get var="objeto"/> ^</set>
       </think>
       ¿También te gusta <get var="verbo"/> <get var="objeto"/>?
       <learn>
         <category>
           <pattern><eval><get var="pattern1"/></eval></pattern>
-          <template><eval><get var="respuesta"/></eval></template>
+          <template>A <eval><get var="nombre"/></eval>.</template>
         </category>
         <category>
           <pattern><eval><get var="pattern2"/></eval></pattern>
-          <template><eval><get var="respuesta"/></eval></template>
+          <template>Le gusta <eval><get var="verbo"/></eval> <eval><get var="objeto"/></eval>.</template>
           </category>
         <category>
           <pattern><eval><get var="pattern3"/></eval></pattern>
-          <template><eval><get var="respuesta"/></eval></template>
+          <template>A <eval><get var="pronombre"/></eval> le gusta <eval><get var="verbo"/></eval> <eval><get var="objeto"/></eval></template>
           </category>
         <category>
           <pattern><eval><get var="pattern4"/></eval></pattern>
-          <template><eval><get var="respuesta"/></eval></template>
+          <template>Le gusta <eval><get var="verbo"/></eval>  <eval><get var="objeto"/></eval></template>
           </category>
         <category>
           <pattern><eval><get var="pattern5"/></eval></pattern>
-          <template><eval><get var="respuesta"/></eval></template>
-          </category>
-        <category>
-          <pattern><eval><get var="pattern6"/></eval></pattern>
           <template><eval><get var="respuesta"/></eval></template>
         </category>
       </learn>
@@ -988,11 +1036,11 @@
   </category>
 
   <category>
-    <pattern>SETHESHE <set>familiarname</set></pattern>
+    <pattern>SETHESHE <set>nombrefamiliar</set></pattern>
     <template>
       <think>
-        <set name="pronoun"><map><name>familiarpronoun</name><star/></map></set>
-        <set><name><get name="pronoun"/></name><star/></set>
+        <set name="pronombre"><map><name>familiarprobombre</name><star/></map></set>
+        <set><name><get name="pronombre"/></name><star/></set>
       </think>
     </template>
   </category>
