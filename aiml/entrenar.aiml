@@ -46,11 +46,11 @@
           </category>
         <category>
           <pattern><eval><get var="pattern3"/></eval></pattern>
-          <template>A <eval><get var="pronombre"/></eval> le gusta <eval><get var="verbo"/></eval> <eval><get var="objeto"/></eval></template>
+          <template>A <eval><get var="pronombre"/></eval> <eval><get var="nombrefamiliar"/></eval> le gusta <eval><get var="verbo"/></eval> <eval><get var="objeto"/></eval></template>
           </category>
         <category>
           <pattern><eval><get var="pattern4"/></eval></pattern>
-          <template>Le gusta <eval><get var="verbo"/></eval>  <eval><get var="objeto"/></eval></template>
+          <template>Le gusta <eval><get var="verbo"/></eval> <eval><get var="objeto"/></eval></template>
           </category>
         <category>
           <pattern><eval><get var="pattern5"/></eval></pattern>
