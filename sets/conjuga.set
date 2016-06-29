@@ -504,7 +504,7 @@
   ["escava"],
   ["existe"],
   ["revienta"],
-  ["revisa"]
+  ["revisa"],
   ["halla"],
   ["invita"],
   ["equivoca"],
@@ -526,5 +526,6 @@
   ["miente"],
   ["acuesta"],
   ["echa"],
+  ["sale"],
   ["fooz"]
 ]
