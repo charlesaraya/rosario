@@ -14,11 +14,11 @@ El proyecto tiene los siguientes directorios:
 
 ###aiml
 
-
+Cada bot tiene su propio conjunto de ficheros AIML. Esta colección de ficheros AIML define de manera única la personalidad de un bot. Un bot puede ser el clon de otro, o puede conectar con otro bot a través de <sraix>, pero el propósito del AIML tiene como objetivo que cada bot posea sus propios ficheros AIML.
 
 ###maps
 
-
+Los mapas definen un mapeo clave-valor y actúan como funciones que devuelven un valor para una clave dada.
 
 ###sets
 
@@ -30,7 +30,3 @@ Los sets AIML son listas de strings en JSON de elementos únicos que comparten u
 - **Bot**: Si, el rojo es un color.
 - **Humano**: ¿Es el coche un color?
 - **Bot**: No, el coche no es un color.
-
-El fichero tendrá la siguiente forma:
-
-[["azul"], ["rojo"], ["amarillo"], ["verde"], ...]
