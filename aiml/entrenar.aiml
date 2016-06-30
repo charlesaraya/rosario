@@ -14,6 +14,48 @@
 
 <!-- TODO: caso A <set>pronombre</set> ME/TE/LES/NOS/OS/LES GUSTA ... -->
 
+<!-- Caso 2 -->
+<!-- A mi me gusta comer paella -->
+<!-- TODO: A el le gusta jugar con sus amigas -->
+<!-- A nosotros nos gusta jugar con sus amigas -->
+  <category>
+    <pattern>A <set>pronombre</set> <set>pronombre</set> GUSTA <set>conjugar</set> *</pattern>
+    <template>
+      <think>
+        <set var="pronombre1"><star/></set>
+        <set var="pronombre2"><star index="2"/></set>
+        <set var="verbo"><star index="3"/></set>
+        <set var="objeto"><star index="4"/></set>
+        <set var="conjuga"><map name="conjugar2conjuga"><get var="verbo"/></map></set>
+        <set var="pronombreopp1"><map name="pronombreopuesto"><get var="pronombre1"/></map></set>
+        <set var="pronombreopp2"><map name="pronombreopuesto"><get var="pronombre2"/></map></set>
+        <srai>SETHESHE <star/></srai>
+        <set var="respuesta">A <get var="pronombreopp1"/> <get var="pronombreopp2"/> gusta <get var="verbo"/> <get var="objeto"/>.</set>
+        <set var="pattern1">A QUIEN LE GUSTA <get var="verbo"/> <get var="objeto"/></set>
+        <set var="pattern2">QUE <get var="pronombreopp2"/> GUSTA ^</set>
+        <set var="pattern3">QUE ES LO QUE <get var="pronombreopp2"/> GUSTA ^</set>
+      </think>
+      Lo recordaré.
+      <learn>
+        <category>
+          <pattern><eval><get var="pattern1"/></eval></pattern>
+          <template>A <eval><get var="pronombreopp1"/></eval>.</template>
+        </category>
+        <category>
+          <pattern><eval><get var="pattern2"/></eval></pattern>
+          <template><eval><get var="respuesta"/></eval></template>
+        </category>
+        <category>
+          <pattern><eval><get var="pattern3"/></eval></pattern>
+          <template><eval><get var="respuesta"/></eval></template>
+          </category>
+      </learn>
+    </template>
+  </category>
+
+<!-- Caso 2 -->
+<!-- A mi madre le gusta comer paella -->
+<!-- A tu hermana le gusta jugar con sus amigas -->
   <category>
     <pattern>A <set>pronombre</set> <set>nombrefamiliar</set> LE GUSTA <set>conjugar</set> *</pattern>
     <template>
@@ -60,6 +102,7 @@
     </template>
   </category>
 
+<!-- A Carlos le gusta pescar atunes -->
   <category>
     <pattern>A <set>nombre</set> LE GUSTA <set>conjugar</set> *</pattern>
     <template>
@@ -108,6 +151,7 @@
     </template>
   </category>
 
+<!-- Carlos fue a pescar atunes -->
   <category>
     <pattern><set>nombre</set> FUE A *</pattern>
     <template>
@@ -153,6 +197,7 @@
     </template>
   </category>
 
+<!-- El sobrero rojo esta debajo de la mesa blanca -->
   <category>
     <pattern><set>articulo</set> * <set>color</set> ESTA <set>prepespacial</set> <set>articulo</set> * <set>color</set></pattern>
     <template>
@@ -220,6 +265,7 @@
     </template>
   </category>
 
+<!-- TODO: A Carlos le gusta pescar atunes -->
   <category>
     <pattern><set>articulo</set> * IS <set>spatialprep</set> <set>articulo</set> *</pattern>
     <template>
@@ -249,7 +295,7 @@
         <set var="pattern42">ESTA <get var="articulo2"/> <get var="nombre2"/> * <get var="articulo1"/> <get var="nombre1"/></set>
         <set var="respuesta4">No. <get var="respuesta1"/></set>
       </think>
-      Vale. Lo he pillado..
+      Entendido.
       <learn>
         <category>
           <pattern><eval><get var="pattern11"/></eval></pattern>
@@ -303,6 +349,7 @@
     </template>
   </category>
 
+<!-- TODO: entenderlo -->
   <category>
     <pattern>COTILLEO</pattern>
     <template>
@@ -327,6 +374,7 @@
     </template>
   </category>
 
+<!-- TODO: entenderlo -->
   <category>
     <pattern>AÑADIR COTILLEO *</pattern>
     <template>
@@ -349,6 +397,7 @@
     </template>
   </category>
 
+<!-- El esta bajo la higuera -->
   <category>
     <pattern><set>articulo</set> * ESTA <set>preposicion</set> *</pattern>
     <template>
@@ -357,13 +406,13 @@
         <set var="sujeto"><star index="2"/></set>
         <set var="preposicion"><star index="3"/></set>
         <set var="objeto"><star index="4"/></set>
-        <set var="respuesta"><get var="articulo"/> <get var="articulo"/> is <get var="preposicion"/> <get var="objeto"/></set>
+        <set var="respuesta"><get var="articulo"/> <get var="sujeto"/> está <get var="preposicion"/> <get var="objeto"/></set>
         <set var="pattern1">DONDE ESTA <get var="articulo"/> <get var="sujeto"/> ^</set>
         <set var="pattern3">QUE ESTA <get var="preposicion"/> <get var="objeto"/> ^</set>
         <set var="pattern4">DONDE DEBERIA BUSCAR <get var="articulo"/> <get var="sujeto"/> ^</set>
         <set var="pattern5">DONDE PUEDO ENCONTRAR <get var="articulo"/> <get var="sujeto"/> ^</set>
       </think>
-      ¿Siempre está <get var="preposicion"/> <star index="4"/>?
+      ¿Siempre está <get var="preposicion"/> <get var="objeto"/>?
       <learn>
         <category>
           <pattern><eval><get var="pattern1"/></eval></pattern>
@@ -389,6 +438,7 @@
       </template>
   </category>
 
+<!-- María está debajo del porche -->
   <category>
     <pattern><set>nombre</set> ESTA <set>preposicion</set> *</pattern>
     <template>
@@ -397,13 +447,13 @@
         <set var="sujeto"><star/></set>
         <set var="preposicion"><star index="2"/></set>
         <set var="objeto"><star index="3"/></set>
-        <set var="respuesta"><get var="sujeto"/> ESTA <get var="preposicion"/> <get var="objeto"/></set>
+        <set var="respuesta"><get var="sujeto"/> está <get var="preposicion"/> <get var="objeto"/></set>
         <set var="pattern1">DONDE ESTA <get var="sujeto"/> ^</set>
         <set var="pattern3">QUIEN ESTA <get var="preposicion"/> <get var="objeto"/> ^</set>
         <set var="pattern4">DONDE DEBERIA BUSCAR A <get var="sujeto"/> ^</set>
         <set var="pattern5">DONDE PUEDO ENCONTRAR A <get var="sujeto"/> ^</set>
       </think>
-      ¿Esta <get name="pronombre"/> siempre <get var="preposicion"/> <get var="objeto"/>?
+      ¿Siempre está <get var="preposicion"/> <get var="objeto"/>?
       <learn>
         <category>
           <pattern><eval><get var="pattern1"/></eval></pattern>
@@ -429,26 +479,26 @@
     </template>
   </category>
 
-<!-- TODO -->
+<!-- TODO: María está jugando en el patio -->
   <category>
-    <pattern><set>name</set> IS <set>being</set> *</pattern>
+    <pattern><set>nombre</set> ESTA <set>conjugando</set> *</pattern>
     <template>
       <think>
-        <set var="name"><star/></set>
-        <set var="being"><star index="2"/></set>
-        <set var="obj"><star index="3"/></set>
-        <srai>SETHESHE <get var="name"/></srai>
-        <set var="be"><map name="being2be"><get var="being"/></map></set>
-        <set var="is"><map name="be2is"><get var="be"/></map></set>
-        <set var="pattern1">What does <get var="name"/> <get var="be"/></set>
-        <set var="pattern2">What is <get var="name"/> <get var="being"/></set>
-        <set var="pattern3">What is <get var="name"/> doing</set>
-        <set var="pattern4">What does <get var="name"/> do</set>
-        <set var="pattern5">Who <get var="is"/> ^</set>
-        <set var="pattern6">Who is <get var="being"/> ^</set>
-        <set var="response"><get var="name"/> <get var="is"/> <get var="obj"/></set>
+        <set var="nombre"><star/></set>
+        <set var="gerundio"><star index="2"/></set>
+        <set var="objeto"><star index="3"/></set>
+        <srai>SETHESHE <get var="nombre"/></srai>
+        <set var="infinitivo"><map name="conjugando2conjugar"><get var="gerundio"/></map></set>
+        <set var="conjuga"><map name="conjugar2conjuga"><get var="infinitivo"/></map></set>
+        <set var="pattern1">What does <get var="nombre"/> <get var="infinitivo"/></set>
+        <set var="pattern2">What is <get var="nombre"/> <get var="gerundio"/></set>
+        <set var="pattern3">What is <get var="nombre"/> doing</set>
+        <set var="pattern4">What does <get var="nombre"/> do</set>
+        <set var="pattern5">Who <get var="conjuga"/> ^</set>
+        <set var="pattern6">Who is <get var="gerundio"/> ^</set>
+        <set var="response"><get var="nombre"/> <get var="conjuga"/> <get var="objeto"/></set>
       </think>
-      I understand.
+      Entiendo.
       <learn>
         <category>
           <pattern><eval><get var="pattern1"/></eval></pattern>
